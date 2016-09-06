@@ -1,8 +1,6 @@
 package com.katas.fizzbuzz
 
-import org.scalatest.{FlatSpec, Matchers}
-
-class FizzBuzzSpec extends FlatSpec with Matchers {
+class FizzBuzzSpec extends UnitSpec {
   it should "returns 'Fizz' when the number is a multiple of 3" in {
     FizzBuzz.parse(3) shouldBe "Fizz"
   }
