@@ -1,5 +1,7 @@
 package com.katas.fizzbuzz
 
+import com.katas.util.UnitSpec
+
 class FizzBuzzSpec extends UnitSpec {
   it should "returns 'Fizz' when the number is a multiple of 3" in {
     FizzBuzz.parse(3) shouldBe "Fizz"
