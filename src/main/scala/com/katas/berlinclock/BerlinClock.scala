@@ -3,7 +3,7 @@ package com.katas.berlinclock
 object BerlinClock {
   def topLampAt(seconds: Int) = if(seconds % 2 == 0) "O" else "Y"
 
-  def firstTopLampsAt(hours: Int): String = {
+  def topFirstRowLampsAt(hours: Int): String = {
     hours / 5 match {
       case 1 => return "ROOO"
       case 2 => return "RROO"
@@ -13,7 +13,7 @@ object BerlinClock {
     }
   }
 
-  def secondTopLampsAt(hours: Int): String = {
+  def topSecondRowLampsAt(hours: Int): String = {
     return "OOOO"
   }
 }

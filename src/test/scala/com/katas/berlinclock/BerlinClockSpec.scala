@@ -9,14 +9,14 @@ class BerlinClockSpec extends UnitSpec {
   }
 
   it should "lights a red lamp each 5 hours in the first top row" in {
-    BerlinClock.firstTopLampsAt(0) shouldBe "OOOO"
-    BerlinClock.firstTopLampsAt(5) shouldBe "ROOO"
-    BerlinClock.firstTopLampsAt(10) shouldBe "RROO"
-    BerlinClock.firstTopLampsAt(15) shouldBe "RRRO"
-    BerlinClock.firstTopLampsAt(20) shouldBe "RRRR"
+    BerlinClock.topFirstRowLampsAt(0) shouldBe "OOOO"
+    BerlinClock.topFirstRowLampsAt(5) shouldBe "ROOO"
+    BerlinClock.topFirstRowLampsAt(10) shouldBe "RROO"
+    BerlinClock.topFirstRowLampsAt(15) shouldBe "RRRO"
+    BerlinClock.topFirstRowLampsAt(20) shouldBe "RRRR"
   }
 
   it should "lights a red lamp each 1 hour in the second top row" in {
-    BerlinClock.secondTopLampsAt(0) shouldBe "OOOO"
+    BerlinClock.topSecondRowLampsAt(0) shouldBe "OOOO"
   }
 }
