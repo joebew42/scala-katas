@@ -15,7 +15,7 @@ object BerlinClock {
   }
 
   def bottomFirstRowLampsAt(minutes: Int): String = {
-    return alternateLightsToLamps(minutes / 5)
+    return lightsToAlternateLamps(minutes / 5)
   }
 
   def bottomSecondRowLampsAt(minutes: Int): String = {
@@ -26,7 +26,7 @@ object BerlinClock {
     return List.fill(lights)(color).mkString.padTo(4, 'O')
   }
 
-  def alternateLightsToLamps(lights: Int): String = {
+  def lightsToAlternateLamps(lights: Int): String = {
     @tailrec
     def lightsToLamps(currentLight: Int, lights: Int, accumulator: String): String = {
       if (currentLight == lights + 1) {
