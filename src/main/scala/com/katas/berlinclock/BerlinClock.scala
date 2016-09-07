@@ -12,12 +12,6 @@ object BerlinClock {
   }
 
   def lightsToLamps(lights: Int): String = {
-    return lights match {
-      case 1 => "ROOO"
-      case 2 => "RROO"
-      case 3 => "RRRO"
-      case 4 => "RRRR"
-      case _ => "OOOO"
-    }
+    return List.fill(lights)('R').mkString.padTo(4, 'O')
   }
 }
