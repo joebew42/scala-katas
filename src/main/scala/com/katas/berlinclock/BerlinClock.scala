@@ -1,5 +1,7 @@
 package com.katas.berlinclock
 
+import scala.annotation.tailrec
+
 object BerlinClock {
 
   def topLampAt(seconds: Int) = if(seconds % 2 == 0) "O" else "Y"
@@ -13,14 +15,26 @@ object BerlinClock {
   }
 
   def bottomFirstRowLampsAt(minutes: Int): String = {
-    return yellowLightsToLamps(minutes / 5)
+    return lightsToLamps(minutes / 5)
   }
 
   def redLightsToLamps(lights: Int): String = {
     return List.fill(lights)('R').mkString.padTo(4, 'O')
   }
 
-  def yellowLightsToLamps(lights: Int): String = {
-    return List.fill(lights)('Y').mkString.padTo(11, 'O')
+  def lightsToLamps(lights: Int): String = {
+    @tailrec
+    def lightsToLamps(currentLight: Int, lights: Int, accumulator: String): String = {
+      if (currentLight == lights + 1) {
+        accumulator
+      } else {
+        currentLight % 3 match {
+          case 0 => lightsToLamps(currentLight + 1, lights, accumulator.concat("R"))
+          case _ => lightsToLamps(currentLight + 1, lights, accumulator.concat("Y"))
+        }
+      }
+    }
+
+    return lightsToLamps(1, lights, "").mkString.padTo(11, 'O')
   }
 }
