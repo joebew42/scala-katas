@@ -27,5 +27,16 @@ class BerlinClockSpec extends UnitSpec {
 
   it should "lights a yellow lamp each 5 minutes in the first bottom row" in {
     BerlinClock.bottomFirstRowLampsAt(0) shouldBe "OOOOOOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(5) shouldBe "YOOOOOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(10) shouldBe "YYOOOOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(15) shouldBe "YYYOOOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(20) shouldBe "YYYYOOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(25) shouldBe "YYYYYOOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(30) shouldBe "YYYYYYOOOOO"
+    BerlinClock.bottomFirstRowLampsAt(35) shouldBe "YYYYYYYOOOO"
+    BerlinClock.bottomFirstRowLampsAt(40) shouldBe "YYYYYYYYOOO"
+    BerlinClock.bottomFirstRowLampsAt(45) shouldBe "YYYYYYYYYOO"
+    BerlinClock.bottomFirstRowLampsAt(50) shouldBe "YYYYYYYYYYO"
+    BerlinClock.bottomFirstRowLampsAt(55) shouldBe "YYYYYYYYYYY"
   }
 }
