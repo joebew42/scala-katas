@@ -18,6 +18,10 @@ object BerlinClock {
     return lightsToLamps(minutes / 5)
   }
 
+  def bottomSecondRowLampsAt(lights: Int): String = {
+    return "OOOO"
+  }
+
   def redLightsToLamps(lights: Int): String = {
     return List.fill(lights)('R').mkString.padTo(4, 'O')
   }
