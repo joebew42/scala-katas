@@ -12,4 +12,8 @@ object BerlinClock {
       case _ => return "OOOO"
     }
   }
+
+  def secondTopLampsAt(hours: Int): String = {
+    return "OOOO"
+  }
 }
