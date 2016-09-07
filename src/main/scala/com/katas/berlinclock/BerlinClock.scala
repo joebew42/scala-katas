@@ -14,6 +14,12 @@ object BerlinClock {
   }
 
   def topSecondRowLampsAt(hours: Int): String = {
-    return "OOOO"
+    return hours % 5 match {
+      case 1 => "ROOO"
+      case 2 => "RROO"
+      case 3 => "RRRO"
+      case 4 => "RRRR"
+      case _ => "OOOO"
+    }
   }
 }
