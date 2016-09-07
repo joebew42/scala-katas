@@ -1,6 +1,7 @@
 package com.katas.berlinclock
 
 object BerlinClock {
+
   def topLampAt(seconds: Int) = if(seconds % 2 == 0) "O" else "Y"
 
   def topFirstRowLampsAt(hours: Int): String = {
@@ -13,5 +14,9 @@ object BerlinClock {
 
   def lightsToLamps(lights: Int): String = {
     return List.fill(lights)('R').mkString.padTo(4, 'O')
+  }
+
+  def bottomFirstRowLampsAt(minutes: Int): String = {
+    return "OOOOOOOOOOO"
   }
 }
