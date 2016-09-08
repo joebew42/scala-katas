@@ -1,7 +1,9 @@
 package com.akka.kv
 
 import akka.actor.{Actor, ActorRef, Props}
-import com.akka.kv.Messages.Start
+import com.akka.kv.Messages.{Ping, Response, Start}
+
+import scala.util.Success
 
 class ServerActor extends Actor {
 
@@ -14,6 +16,10 @@ class ServerActor extends Actor {
   }
 
   def handleRequests: Receive = {
+    case Ping(workerNumber) =>
+      workers(workerNumber % workers.size) ! "ping"
+    case Response(Success(message)) =>
+      println(s"Response: ${message}")
     case _ =>
       println("request for worker ...")
   }

@@ -1,7 +1,7 @@
 package com.akka.kv
 
-import akka.actor.{ActorSystem, Props}
-import com.akka.kv.Messages.Start
+import akka.actor.{ActorRef, ActorSystem, Props}
+import com.akka.kv.Messages.{Command, Ping, Start}
 
 object AkkaClient {
   private var world: Option[ActorSystem] = None
@@ -14,12 +14,25 @@ object AkkaClient {
 
     server ! Start(10)
 
-    while( true ) {
-      println("Say something: ")
+    handleInput(server)
+  }
+
+  def handleInput(server: ActorRef): Unit = {
+    while (true) {
+      println("Issue a command: ")
       Console.in.readLine() match {
+        case line => server ! buildCommandFrom(line)
         case _ =>
-          server ! "some request for worker here"
       }
     }
+  }
+
+  val commandWorkerRE = """^\s*(\w+)\s+(\d+)\s*$""".r
+
+  def buildCommandFrom(line: String): Command = line match {
+    case commandWorkerRE(command, worker) => command match {
+      case "ping" => Ping(worker.toInt)
+    }
+    case _ => null
   }
 }
