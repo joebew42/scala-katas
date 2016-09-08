@@ -12,7 +12,7 @@ object AkkaClient {
 
     val server = system.actorOf(Props[ServerActor], name = "server")
 
-    server ! Start
+    server ! Start(10)
 
     while( true ) {
       println("Say something: ")
