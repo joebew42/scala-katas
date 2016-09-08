@@ -18,6 +18,7 @@ object AkkaClient {
       println("Say something: ")
       Console.in.readLine() match {
         case _ =>
+          server ! "some request for worker here"
       }
     }
   }
