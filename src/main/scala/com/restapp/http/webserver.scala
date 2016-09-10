@@ -3,8 +3,8 @@ package com.restapp.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import com.restapp.domain.UserRepository
 import com.restapp.http.routers.{HelloRouter, UsersRouter}
+import com.restapp.infrastructure.FakeUserRepository
 
 import scala.io.StdIn
 
@@ -16,7 +16,7 @@ object WebServer {
     implicit val executionContext = system.dispatcher
 
     val helloRouter = new HelloRouter()
-    val usersRouter = new UsersRouter(new UserRepository())
+    val usersRouter = new UsersRouter(new FakeUserRepository())
     val application = new Application(helloRouter, usersRouter)
 
     val bindingFuture = Http().bindAndHandle(application.routes, "localhost", 8080)

@@ -13,3 +13,4 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json-experimental
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-testkit" % "2.4.10" % "test"
+libraryDependencies += "org.mockito" % "mockito-core" % "1.10.19" % "test"

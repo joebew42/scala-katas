@@ -2,22 +2,22 @@ package com.restapp.http
 
 import com.restapp.domain.{User, UserRepository}
 import com.restapp.http.routers.UsersRouter
+import org.mockito.Mockito.when
+import org.scalatest.mockito.MockitoSugar
 
-class UsersRouterSpec extends RouterSpec {
+import scala.concurrent.Future
 
-  val repository = new UserRepository()
+class UsersRouterSpec extends RouterSpec with MockitoSugar {
+  val repository = mock[UserRepository]
   val usersRouter = new UsersRouter(repository)
 
-  trait Context {
-    val routes = usersRouter.routes
-  }
+  val routes = usersRouter.routes
 
-  "Users service" should {
-    "retrieve users list" in new Context {
-      Get("/users") ~> routes ~> check {
-        responseAs[List[User]].isEmpty shouldBe false
-      }
+  "retrieve users list" in {
+    when(repository.findAll()).thenReturn(Future(List(User("joe"))))
+
+    Get("/users") ~> routes ~> check {
+      responseAs[List[User]].isEmpty shouldBe false
     }
   }
-
 }
