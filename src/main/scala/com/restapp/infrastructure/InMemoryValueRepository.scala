@@ -1,6 +1,6 @@
 package com.restapp.infrastructure
 
-import com.restapp.domain.ValueRepository
+import com.restapp.domain.{Value, ValueRepository}
 
 import scala.collection.immutable.HashMap
 import scala.concurrent.Future
@@ -11,7 +11,8 @@ class InMemoryValueRepository() extends ValueRepository {
     "other/path" -> "a content with random values\nnew line"
   )
 
-  override def findByKey(key: String): Future[String] = {
-    Future.successful(values.getOrElse(key, ""))
+  override def findByKey(key: String): Future[Value] = {
+    val value = Value(key, values.getOrElse(key, ""))
+    Future.successful(value)
   }
 }

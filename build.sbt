@@ -10,6 +10,7 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.4.10"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-experimental" % "2.4.10"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json-experimental" % "2.4.10"
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.1.1"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.0"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
