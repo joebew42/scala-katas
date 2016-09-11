@@ -4,12 +4,15 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.restapp.http.routers.{HelloRouter, UsersRouter, ValuesRouter}
+import com.restapp.infrastructure.utils.Config
 import com.restapp.infrastructure.{FakeUserRepository, InMemoryValueRepository}
 
 import scala.io.StdIn
 
-object WebServer {
+object WebServer extends Config {
   def main(args: Array[String]) {
+    val dbMigration = new DatabaseMigration(databaseUrl, databaseUser, databasePassword)
+    dbMigration.migrate()
 
     implicit val system = ActorSystem("my-system")
     implicit val materializer = ActorMaterializer()
@@ -20,12 +23,12 @@ object WebServer {
     val valuesRouter = new ValuesRouter(new InMemoryValueRepository())
     val application = new Application(helloRouter, usersRouter, valuesRouter)
 
-    val bindingFuture = Http().bindAndHandle(application.routes, "localhost", 8080)
+    val bindingFuture = Http().bindAndHandle(application.routes, httpInterface, httpPort)
 
-    println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
-    StdIn.readLine() // let it run until user presses return
+    println(s"Server online at http://${httpInterface}:${httpPort}/\nPress RETURN to stop...")
+    StdIn.readLine()
     bindingFuture
-      .flatMap(_.unbind()) // trigger unbinding from the port
-      .onComplete(_ => system.terminate()) // and shutdown when done
+      .flatMap(_.unbind())
+      .onComplete(_ => system.terminate())
   }
 }
