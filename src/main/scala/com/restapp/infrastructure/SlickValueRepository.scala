@@ -4,7 +4,7 @@ import com.restapp.domain.{Value, ValueRepository}
 
 import scala.concurrent.Future
 
-class SlickH2ValueRepository(val slickDatabase: SlickDatabase) extends ValueRepository {
+class SlickValueRepository(val slickDatabase: SlickDatabase) extends ValueRepository {
 
   import slickDatabase._
   import slickDatabase.driver.api._
