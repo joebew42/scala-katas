@@ -5,7 +5,7 @@ import com.restapp.domain.{User, UserRepository}
 import scala.concurrent.Future
 
 class FakeUserRepository() extends UserRepository {
-  def findAll(): Future[List[User]] = {
+  override def findAll(): Future[List[User]] = {
     Future.successful(List(User("joe")))
   }
 }
