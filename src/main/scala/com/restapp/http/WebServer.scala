@@ -22,9 +22,9 @@ object WebServer extends Config {
     val usersRouter = new UsersRouter(new FakeUserRepository())
 
     val slickDatabase = new SlickDatabase()
-    val slickH2ValueRepository = new SlickValueRepository(slickDatabase)
+    val valueRepository = new SlickValueRepository(slickDatabase)
+    val valuesRouter = new ValuesRouter(valueRepository)
 
-    val valuesRouter = new ValuesRouter(slickH2ValueRepository)
     val application = new Application(helloRouter, usersRouter, valuesRouter)
 
     val bindingFuture = Http().bindAndHandle(application.routes, httpInterface, httpPort)
