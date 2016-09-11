@@ -1,12 +1,24 @@
 package com.restapp.infrastructure
 
 import com.restapp.domain.{Value, ValueRepository}
-import org.h2.engine.Database
 
 import scala.concurrent.Future
 
-class SlickH2ValueRepository() extends ValueRepository {
-  override def findByKey(key: String): Future[Value] = {
-    Future.successful(Value("",""))
+class SlickH2ValueRepository(val slickDatabase: SlickDatabase) extends ValueRepository {
+
+  import slickDatabase._
+  import slickDatabase.driver.api._
+
+  class Values(tag: Tag) extends Table[Value](tag, "values") {
+    def key = column[Option[String]]("key", O.PrimaryKey)
+    def value = column[String]("value")
+    def * = (key, value) <> ((Value.apply _).tupled, Value.unapply)
   }
+
+  protected val values = TableQuery[Values]
+
+  override def findByKey(key: String): Future[Option[Value]] = {
+    database.run(values.filter(_.key === key).result.headOption)
+  }
+
 }

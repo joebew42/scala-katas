@@ -1,6 +1,5 @@
 package com.restapp.http
 
-import akka.http.scaladsl.model.HttpResponse
 import com.restapp.domain.{Value, ValueRepository}
 import com.restapp.http.routers.ValuesRouter
 import org.mockito.Mockito._
@@ -15,8 +14,8 @@ class ValuesRouterSpec extends RouterSpec with MockitoSugar {
   val routes = router.routes
 
   "retrieves a value" in {
-    val value = Value("\"path/for/value\"", "a value")
-    when(repository.findByKey("path/for/value")).thenReturn(Future(value))
+    val value = Value(Some("\"path/for/value\""), "a value")
+    when(repository.findByKey("path/for/value")).thenReturn(Future(Some(value)))
 
     Get("/values/path/for/value") ~> routes ~> check {
       responseAs[String] shouldBe "a value"
